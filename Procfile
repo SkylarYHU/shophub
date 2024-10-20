@@ -1,1 +1,1 @@
-web: gunicorn ecommerce.wsgi
+web: bash start.sh
