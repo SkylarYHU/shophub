@@ -25,7 +25,4 @@ urlpatterns = [
 ]
 
 # This ensures that media files are accessible via /media/ URLs when running your development server (DEBUG=True).
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-else:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
