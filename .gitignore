@@ -9,15 +9,11 @@ __pycache__/
 *.env.local
 
 # Django
-/media/
 *.log
 *.pot
 *.pyc
 *.pyo
 
-# Static files
-/staticfiles/
-/static/
 
 # Virtual environment
 venv/
