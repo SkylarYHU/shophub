@@ -9,7 +9,6 @@ __pycache__/
 *.env.local
 
 # Django
-db.sqlite3
 /media/
 *.log
 *.pot
