@@ -1,0 +1,23 @@
+<!--By including this tag, you can use the tag in your template to reference static files such as CSS, JavaScript, images, etc.-->
+{% extends "store/main.html" %}
+{% load static %}
+{% block content %}
+<!--row: creates a horizontal group of columns in Bootstrap's grid system-->
+<div class="row">
+  {% for product in products %}
+  <!--(col-lg-4 creates a column that spans 4 out of 12 available columns in a grid layout when the viewport is large (≥992px wide)-->
+  <div class="col-lg-4">
+    <!--The .thumbnail class is a Bootstrap utility class that adds styling for images, making them appear as thumbnails. -->
+    <img src="{{product.imageURL}}" alt="" class="thumbnail">
+    <div class="box-element product">
+      <h6><strong>{{product.name}}</strong></h6>
+      <hr>
+      <!--This class styles the button with a secondary outline-->
+      <button  data-product="{{product.id}}" data-action="add" class="btn btn-outline-primary add-btn update-cart">Add to Cart</button>
+		  <!--<a class="btn btn-outline-success" href="#">View</a>-->
+		  <h4 style="display: inline-block; float: right"><strong>${{product.price|floatformat:2}}</strong></h4>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}
