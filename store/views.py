@@ -5,6 +5,12 @@ from django.http import JsonResponse
 import json
 import datetime
 # Create your views here.
+
+def my_view(request):
+    response = JsonResponse({"data": "your_data"})
+    response['Access-Control-Allow-Origin'] = '*'
+    return response
+
 def store(request):
   data = cartData(request)
   cartItems = data['cartItems']
