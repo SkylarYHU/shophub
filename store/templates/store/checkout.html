@@ -171,7 +171,9 @@
 
       window.location.href = "{% url 'store' %}"
     })
-
+    .catch((error) => {
+      console.error('Error:', error);
+  });
 
   }
 </script>

@@ -84,8 +84,9 @@ def processOrder(request):
     order.transaction_id = transaction_id
 
     # Correct total comparison
-    if total == float(order.get_cart_total):
+    if total == float(order.get_cart_total()):
         order.complete = True
+
     else:
         print("Total mismatch: Order total:", order.get_cart_total, "Paid total:", total)
 
