@@ -71,32 +71,34 @@ def updateItem(request):
   return JsonResponse("Item was added", safe=False)
 
 def processOrder(request):
-  transaction_id = datetime.datetime.now().timestamp()
-  data = json.loads(request.body)
+    transaction_id = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
 
-  if request.user.is_authenticated:
-    customer = request.user.customer
-    order, created = Order.objects.get_or_create(customer=customer, complete=False)
-    
-  else:
-    customer, order = guestOrder(request, data)
-    
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+    else:
+        customer, order = guestOrder(request, data)
 
     total = float(data['form']['total'])
     order.transaction_id = transaction_id
 
+    # Correct total comparison
     if total == float(order.get_cart_total):
-      order.complete = True
+        order.complete = True
+    else:
+        print("Total mismatch: Order total:", order.get_cart_total, "Paid total:", total)
+
     order.save()
 
-    if order.shipping == True:
-      ShippingAddress.objects.create(
-        customer = customer,
-        order = order,
-        address = data['shipping']['address'],
-        city=data['shipping']['city'],
-        state=data['shipping']['state'],
-        zipcode=data['shipping']['zipcode'],
-      )
+    if order.shipping:
+        ShippingAddress.objects.create(
+            customer=customer,
+            order=order,
+            address=data['shipping']['address'],
+            city=data['shipping']['city'],
+            state=data['shipping']['state'],
+            zipcode=data['shipping']['zipcode'],
+        )
 
-  return JsonResponse('Payment complete!', safe=False)
+    return JsonResponse('Payment complete!', safe=False)
