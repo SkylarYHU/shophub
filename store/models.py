@@ -20,7 +20,7 @@ class Product(models.Model):
   price = models.DecimalField(max_digits=7,decimal_places=2)
   # This is a field that stores a True/False value (a boolean). In this case, it indicates whether the product is digital 
   digital = models.BooleanField(default=False, blank=True, null=True)
-  image = models.ImageField(null=True, blank=True)
+  image = models.ImageField(upload_to='products/') 
 
   def __str__(self):
     return self.name
