@@ -127,7 +127,8 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
  
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(os.environ.get('RAILWAY_VOLUME_MOUNT_PATH', '/default/path'), 'media')
+RAILWAY_VOLUME_PATH = os.environ.get('RAILWAY_VOLUME_MOUNT_PATH', '/app')
+MEDIA_ROOT = os.path.join(RAILWAY_VOLUME_PATH, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
